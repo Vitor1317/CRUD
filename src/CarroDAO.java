@@ -30,7 +30,7 @@ public class CarroDAO {
                 return generateKeys.getInt(1);
             }
         } catch (SQLException error) {
-            System.out.println("Erro Create: " + error.getMessage());
+            System.err.println("Erro Create: " + error.getMessage());
         }
 
         return -1;
@@ -96,6 +96,22 @@ public class CarroDAO {
 
         } catch (SQLException error) {
             System.err.println("Erro update: " + error.getMessage());
+        }
+
+        return false;
+    }
+
+    public boolean deleteCarro(int id) {
+        String sql = "DELETE FROM carro id=?";
+        try {
+            Connection connection = connectionFactory.connectionDB();
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, id);
+            int rowsAffected = stmt.executeUpdate();
+
+            return rowsAffected > 0;
+        } catch(SQLException error) {
+            System.err.println("Error delete: " + error.getMessage());
         }
 
         return false;

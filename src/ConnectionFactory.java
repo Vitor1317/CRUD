@@ -13,7 +13,7 @@ public class ConnectionFactory {
 
             connection = DriverManager.getConnection(url, user, password);
         } catch (SQLException e) {
-            System.out.println("Erro: " + e.getMessage());
+            System.err.println("Error: " + e.getMessage());
         }
 
         return connection;
